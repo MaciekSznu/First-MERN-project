@@ -1,25 +1,26 @@
 import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import MainLayout from './components/layouts/MainLayout/MainLayout';
+import Home from './components/pages/Home/HomePage';
+import Posts from './components/pages/Posts/PostsPage';
+import Contact from './components/pages/Contact/ContactPage';
+import NotFound from './components/pages/NotFound/NotFoundPage';
+
 
 class App extends React.Component {
 
-  state = {
-    posts: [],
-  }
-
-  // connection to server endpoint, endpoint answer is written to this.state.posts
-  componentDidMount() {
-    fetch('http://localhost:8000/api/posts')
-      .then(res => res.json())
-      .then(res => {
-        this.setState({posts: res});
-    });
-  }
-
+  // exact wymusza renderowanie tylko gdy scieżka jest identyczna z podaną w linku
+  // Switch zapewnia, że tylko jeden route zostanie zwrócony
   render() {
     return (
-      <div>
-        <ul>{this.state.posts.map(post => <li key={post.id}>{post.title}</li>)}</ul>
-      </div>
+     <MainLayout>
+       <Switch>
+         <Route path='/' exact component={Home} />
+         <Route path='/posts' exact component={Posts} />
+         <Route path='/contact' exact component={Contact} />
+         <Route component={NotFound} />
+       </Switch>
+     </MainLayout>
     );
   }
 };
