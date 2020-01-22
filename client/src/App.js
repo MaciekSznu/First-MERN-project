@@ -6,6 +6,8 @@ import Posts from './components/pages/Posts/PostsPage';
 import Contact from './components/pages/Contact/ContactPage';
 import NotFound from './components/pages/NotFound/NotFoundPage';
 import AddPost from './components/pages/AddPostPage/AddPostPage';
+import SinglePost from './components/pages/SinglePostPage/SinglePostPage';
+
 
 
 
@@ -21,6 +23,7 @@ class App extends React.Component {
          <Route path='/posts' exact component={Posts} />
          <Route path='/contact' exact component={Contact} />
          <Route path='/posts/new' exact component={AddPost} />
+         <Route path='/posts/:id' exact component={SinglePost}/>
          <Route component={NotFound} />
        </Switch>
      </MainLayout>
