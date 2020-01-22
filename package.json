@@ -11,6 +11,9 @@
   "scripts": {
     "start": "npm-run-all -p -l start:*",
     "start:server": "cd server && node server.js",
-    "start:clientt": "cd client && yarn start"
+    "start:clientt": "cd client && yarn start",
+    "install:client": "cd client && npm install",
+    "install:server": "cd server && npm install",
+    "postinstall": "run-p install:*"
   }
 }
