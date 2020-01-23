@@ -12,6 +12,20 @@ const createActionName = name => `app/${reducerName}/${name}`;
 // INITIAL STATE
 const initialState = [];
 
+// THUNKS
+// thunk must return function with dispatch as parameter
+export const loadPostsRequest = () => {
+  return dispatch => {
+
+    console.log('Request started...');
+    setTimeout(() => {
+      const arr = [{ id: 'a3fssdc1', title: 'Test', content: 'Lorem Ipsum' }];
+      dispatch(loadPosts(arr));
+      console.log('Request finished after 2 sec');
+    }, 2000);
+  };
+};
+
 // REDUCER
 export default function reducer(statePart = initialState, action = {}) {
   switch (action.type) {
