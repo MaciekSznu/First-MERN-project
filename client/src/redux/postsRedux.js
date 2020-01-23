@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 // SELECTORS
 export const getPosts = ({posts}) => posts;
 
@@ -17,12 +19,14 @@ const initialState = [];
 export const loadPostsRequest = () => {
   return dispatch => {
 
-    console.log('Request started...');
-    setTimeout(() => {
-      const arr = [{ id: 'a3fssdc1', title: 'Test', content: 'Lorem Ipsum' }];
-      dispatch(loadPosts(arr));
-      console.log('Request finished after 2 sec');
-    }, 2000);
+    axios.get('http://localhost:8000/api/posts')
+      .then(res => {
+        dispatch(loadPosts(res.data));
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
+
   };
 };
 

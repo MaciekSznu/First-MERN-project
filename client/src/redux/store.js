@@ -1,5 +1,5 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import posts from './PostsRedux';
+import posts from './postsRedux';
 import thunk from 'redux-thunk';
 
 const rootReducer = combineReducers({
