@@ -2,12 +2,12 @@
 export const getPosts = ({posts}) => posts;
 
 // ACTIONS
-export const LOAD_POSTS = createActionName('LOAD_POSTS');
-export const loadPosts = payload ({ payload, type: LOAD_POSTS });
-
 //action name creator
 const reducerName = 'posts';
 const createActionName = name => `app/${reducerName}/${name}`;
+
+export const LOAD_POSTS = createActionName('LOAD_POSTS');
+export const loadPosts = payload => ({ payload, type: LOAD_POSTS });
 
 // INITIAL STATE
 const initialState = [];
