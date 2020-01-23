@@ -1,31 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import PageTitle from '../../common/PageTitle/PageTitle';
+import PostsCounter from '../../features/PostsCounter/PostsCounter';
+import Posts from '../../features/Posts/Posts';
 
-class PostsPage extends React.Component {
-
-  state = {
-    posts: [],
-  }
-
-  componentDidMount() {
-    fetch('http://localhost:8000/api/posts')
-      .then(res => res.json())
-      .then(res => {
-        this.setState({ posts: res });
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        <h1>Posts</h1>
-        <ul>
-            {this.state.posts.map(post => <Link to={`/posts/${post.id}`}><li key={post.id}>{post.title}</li></Link>)}
-        </ul>
-      </div>
-    );
-  }
-
-};
+const PostsPage = () => (
+  <div>
+    <PageTitle>Posts list</PageTitle>
+    <PostsCounter />
+    <Posts />
+  </div>
+);
 
 export default PostsPage;
