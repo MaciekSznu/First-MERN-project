@@ -18,15 +18,16 @@ const initialState = [];
 // THUNKS
 // thunk must return function with dispatch as parameter
 export const loadPostsRequest = () => {
-  return dispatch => {
+  return async dispatch => {
 
-    axios.get(`${API_URL}/posts`)
-      .then(res => {
-        dispatch(loadPosts(res.data));
-      })
-      .catch(err => {
+    try {
+
+      let res = await axios.get(`${API_URL}/posts`);
+      dispatch(loadPosts(res.data));
+    
+    } catch(e) {
         console.log(err.message);
-      });
+    }
 
   };
 };
