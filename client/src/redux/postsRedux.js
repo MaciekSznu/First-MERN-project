@@ -3,6 +3,8 @@ import { API_URL } from '../config';
 
 // SELECTORS
 export const getPosts = ({posts}) => posts;
+export const getPostsAmount = ({posts}) => posts.length;
+
 
 // ACTIONS
 //action name creator
@@ -26,7 +28,7 @@ export const loadPostsRequest = () => {
       dispatch(loadPosts(res.data));
     
     } catch(e) {
-        console.log(err.message);
+        console.log(e.message);
     }
 
   };
