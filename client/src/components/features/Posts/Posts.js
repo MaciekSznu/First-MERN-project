@@ -1,5 +1,6 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
+import PostsList from '../PostsList/PostsList';
 
 class Posts extends React.Component {
 
@@ -13,10 +14,8 @@ class Posts extends React.Component {
     const {posts} = this.props;
 
     return (
-      <div>Posts
-        <ul>
-          {posts.map(post => <li key={post.id}>{post.title}</li>)}
-        </ul>
+      <div>
+        <PostsList posts={posts} />
       </div>
     );
   }
