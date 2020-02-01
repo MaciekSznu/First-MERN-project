@@ -12,12 +12,13 @@ class Posts extends React.Component {
   }
 
   render() {
-    const {posts} = this.props;
+    const {posts, request} = this.props;
 
+    // Spinner is being rendered only if request.pending = true
     return (
       <div>
+        {request.pending && <Spinner />}
         <PostsList posts={posts} />
-        <Spinner />
       </div>
     );
   }
