@@ -1,25 +1,29 @@
 const express = require('express');
 const cors = require('cors');
+const config = require('./config');
 
 const app = express();
 
-// adding  middleware
-// body-parser - przypomnieć sobie co to było!!!
+// import routes
+const postRoutes = require('./routes/post.routes');
+
+// import database
+const mongoose = require('mongoose');
+
+// connect to database
+mongoose.connect(config.DB, {useNewUrlParser: true});
+let db = mongoose.connection;
+
+// success/error servicing
+db.once('open', () => console.log('Connected to the database'));
+db.on('error', (err) => console.log(`Error ${err}`));
+
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
-// first endpoint
-// .json() let return from server json object
-app.get('/api/posts', (req, res) => {
-  const data = [
-    { id: '1adfasf', title: 'Lorem Ipsum', content: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.' },
-    { id: '2evxc34', title: 'Lorem Ipsum II', content: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.' },
-  ]
-  res.json(data);
-});
+app.use('/api', postRoutes);
 
 // listening server port
-app.listen(8000, function(){
-  console.log('Server is running on port:', 8000);
+app.listen(config.PORT, function(){
+  console.log('Server is running on port:', config.PORT);
 });
