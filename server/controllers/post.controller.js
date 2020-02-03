@@ -1,10 +1,15 @@
+const Post = require('../models/post.model');
+
 // get all posts
 // first endpoint
 
-exports.getPosts = function (req, res) {
-  const data = [
-    { id: '1adfasf', title: 'Lorem Ipsum', content: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit' },
-    { id: '2evxc34', title: 'Lorem Ipsum II', content: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit' },
-  ]
-  res.json(data);
+exports.getPosts = async (req, res) => {
+
+  try {
+    res.status(200).json( await Post.find());
+  }
+  catch(err) {
+    res.status(500).json(err);
+  }
+  // Znajdź wszystkie posty i zwróć je do klienta wraz z kodem 200 (sukces), o ile udało się wykonać funkcję. Jeśli pojawił się błąd, to zamiast tego, zwróć go, wraz z kodem 500.
 };
