@@ -24,7 +24,7 @@ export const loadPosts = payload => ({ payload, type: LOAD_POSTS });
 export const startRequest = () => ({type: START_REQUEST});
 export const endRequest = () => ({type: END_REQUEST});
 export const errorRequest = error => ({ error, type: ERROR_REQUEST });
-export const loadSinglePostRequest = () => ({ payload, type: LOAD_SINGLE_POST });
+export const loadSinglePost = payload => ({ payload, type: LOAD_SINGLE_POST });
 
 // INITIAL STATE
 const initialState = {
