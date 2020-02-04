@@ -3,7 +3,7 @@ import { getSinglePost, getRequest, loadSinglePostRequest } from '../../../redux
 import SinglePost from './SinglePost';
 
 const mapStateToProps = state => ({
-  posts: getSinglePost(state),
+  post: getSinglePost(state),
   request: getRequest(state),
 });
 
