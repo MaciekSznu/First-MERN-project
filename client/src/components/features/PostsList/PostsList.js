@@ -15,6 +15,7 @@ PostsList.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
     })
   ),

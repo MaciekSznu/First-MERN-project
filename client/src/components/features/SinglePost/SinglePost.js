@@ -18,7 +18,7 @@ class SinglePost extends React.Component {
     const renderLoader = () => ((request.pending === true || request.succes === null) && <Spinner />);
 
     const renderPost = () => ((request.pending === false && request.succes === true && post !== undefined && post !== null) && (
-      <Post title={post.title} content={post.content}/>
+      <Post title={post.title} author={post.author} content={post.content}/>
     ));
 
     const renderInfo = () => ((request.pending === false && request.succes === true && (post === undefined || post === null)) &&
@@ -42,6 +42,7 @@ SinglePost.propTypes = {
     PropTypes.shape({
         id: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
+        author: PropTypes.string.isRequired,
         content: PropTypes.string.isRequired,
     })
   ),
