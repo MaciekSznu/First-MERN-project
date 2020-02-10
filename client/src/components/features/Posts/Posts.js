@@ -7,8 +7,9 @@ import Alert from '../../common/Alert/Alert';
 class Posts extends React.Component {
 
   componentDidMount() {
-    const {loadPosts} = this.props;
+    const { loadPosts, resetRequest } = this.props;
     loadPosts();
+    resetRequest();
     // loadPosts to loadPostsRequest, po upływie zadeklarowanych 2s odpala dispatch(loadPosts(...)) i modysikuje store
   }
 

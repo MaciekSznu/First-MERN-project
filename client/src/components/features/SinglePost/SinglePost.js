@@ -7,8 +7,9 @@ import Post from './Post';
 class SinglePost extends React.Component {
 
   componentDidMount() {
-    const {loadSinglePost, id} = this.props;
+    const {loadSinglePost, id, resetRequest} = this.props;
     loadSinglePost(id);
+    resetRequest();
   }
 
 

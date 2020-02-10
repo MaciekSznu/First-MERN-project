@@ -25,6 +25,11 @@ class PostForm extends React.Component {
     }
   }
 
+  componentDidMount() {
+    const { resetRequest } = this.props;
+    resetRequest();
+  }
+
   // the name of the atribute to change come from value of the name atribute
   handleChange = (e) => {
     const { post } = this.state;
