@@ -10,6 +10,8 @@ import TextField from '../../common/TextField/TextField';
 import SectionTitle from '../../common/SectionTitle/SectionTitle';
 import Button from '../../common/Button/Button';
 
+import './PostForm.scss';
+
 class PostForm extends React.Component {
 
   state = {
