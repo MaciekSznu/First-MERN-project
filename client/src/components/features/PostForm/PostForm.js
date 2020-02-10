@@ -68,7 +68,7 @@ class PostForm extends React.Component {
           onChange={handleEditor}
           options={{ placeholder: false, toolbar: { buttons: ['bold', 'italic', 'underline', 'anchor', 'h2', 'h3'] } }}
         />
-        <Button variant="primary">Add post</Button>
+        <Button type="submit" variant="primary">Add post</Button>
       </form>
     );
   }

@@ -10,7 +10,6 @@ class Posts extends React.Component {
     const { loadPosts, resetRequest } = this.props;
     loadPosts();
     resetRequest();
-    // loadPosts to loadPostsRequest, po upływie zadeklarowanych 2s odpala dispatch(loadPosts(...)) i modysikuje store
   }
 
   render() {
