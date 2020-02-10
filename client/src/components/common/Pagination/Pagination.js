@@ -10,19 +10,19 @@ class Pagination extends React.Component {
     presentPage: this.props.initialPage || 1
   }
 
+  // change local state and then exesute onPageChange function
+  changePage = (newPage) => {
+    const { onPageChange } = this.props;
+
+    this.setState({ presetnPage: newPage });
+    onPageChange(newPage);
+  }
+
   render() {
 
     const { pages, onPageChange } = this.props;
     const { presentPage } = this.state;
     const { changePage } = this;
-
-    // change local state and then exesute onPageChange function
-    changePage = (newPage) => {
-      const { onChangePage } = this.props;
-
-      this.setState({ presetnPage: newPage });
-      onPageChange(newPage);
-    }
 
     // [...Array(pages)] - create an array with no specified data but with number of elements equals to number of pages
     // onClick={() => {changePage(page) }} - execute changePage function
@@ -34,7 +34,7 @@ class Pagination extends React.Component {
           <li
             key={++page}
             onClick={() => {changePage(page) }}
-            className={`pagination__list__item${((page) === presentPage) ? 'pagination__list__item--active' : ''}`}>
+            className={`pagination__list__item${((page) === presentPage) ? ' pagination__list__item--active' : ''}`}>
             {page}
           </li>
           )}
