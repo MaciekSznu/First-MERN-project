@@ -8,13 +8,19 @@ import Pagination from '../../common/Pagination/Pagination';
 class Posts extends React.Component {
 
   componentDidMount() {
-    const { loadPosts, resetRequest } = this.props;
-    loadPosts();
+    const { loadPostsByPage, resetRequest } = this.props;
+    loadPostsByPage(1);
     resetRequest();
   }
 
+  loadPostsPage = (page) => {
+    const { loadPostsByPage } = this.props;
+    loadPostsByPage(page);
+  }
+
   render() {
-    const {posts, request, error} = this.props;
+    const { posts, request, error, pages } = this.props;
+    const { loadPostsPage } = this;
 
     // Spinner is being rendered only if request.pending = true
     return (
@@ -23,7 +29,7 @@ class Posts extends React.Component {
         {(request.pending === false && request.succes === true && posts.length > 0) && <PostsList posts={posts} />}
         {(request.pending === false && request.error !== null) && <Alert variant='error'> {error} </Alert>}
         {(request.pending === false && request.succes === true && posts.length === 0) && <Alert variant='info'> No posts </Alert>}
-        <Pagination pages={10} onPageChange={(page) => { console.log(page) }} />
+        <Pagination pages={pages} onPageChange={loadPostsPage} />
       </div>
     );
   }
@@ -38,7 +44,7 @@ Posts.propTypes = {
       content: PropTypes.string.isRequired,
     })
   ),
-  loadPosts: PropTypes.func.isRequired,
+  loadPostsByPage: PropTypes.func.isRequired,
 };
 
 export default Posts;
