@@ -8,6 +8,7 @@ export const getRequest = ({posts}) => posts.request;
 export const getSinglePost = ({posts}) => posts.singlePost;
 export const getPages = ({ posts }) => Math.ceil(posts.amount / posts.postsPerPage);
 export const getActualPage = ({posts}) => posts.presentPage;
+export const getPostToEdit = ({posts}) => posts.postToEdit;
 
 // ACTIONS & CREATORS
 //action name creator
@@ -21,6 +22,7 @@ export const ERROR_REQUEST = createActionName('ERROR_REQUEST');
 export const LOAD_SINGLE_POST = createActionName('LOAD_SINGLE_POST');
 export const RESET_REQUEST = createActionName('RESET_REQUEST');
 export const LOAD_POSTS_PAGE = createActionName('LOAD_POSTS_PAGE');
+export const LOAD_POST_TO_EDIT = createActionName('LOAD_POST_TO_EDIT');
 
 export const loadPosts = payload => ({ payload, type: LOAD_POSTS });
 export const startRequest = () => ({type: START_REQUEST});
@@ -29,6 +31,7 @@ export const errorRequest = error => ({ error, type: ERROR_REQUEST });
 export const loadSinglePost = payload => ({ payload, type: LOAD_SINGLE_POST });
 export const resetRequest = () => ({type: RESET_REQUEST});
 export const loadPostsByPage = payload => ({ payload, type: LOAD_POSTS_PAGE });
+export const loadPostToEdit = payload => ({ payload, type: LOAD_POST_TO_EDIT });
 
 // INITIAL STATE
 const initialState = {
@@ -128,6 +131,39 @@ export const loadPostsByPageRequest = (page, postsPerPage = 2) => {
   };
 };
 
+export const loadPostToEditRequest = (id) => {
+  return async dispatch => {
+
+    dispatch(startRequest());
+    try {
+      let res = await axios.get(`${API_URL}/posts/${id}`);
+      dispatch(loadPostToEdit(res.data));
+      dispatch(endRequest());
+    }
+    catch(e) {
+      dispatch(errorRequest(e.message));
+    }
+
+  };
+};
+
+export const editPostRequest = (post) => {
+  return async dispatch => {
+
+    dispatch(startRequest());
+    try {
+
+      await axios.put(`${API_URL}/posts/${post.id}`, post);
+      await new Promise((resolve, reject) => setTimeout(resolve, 1000));
+      dispatch(endRequest());
+    
+    } catch(e) {
+      dispatch(errorRequest(e.message));
+    }
+
+  };
+};
+
 // REDUCER
 export default function reducer(statePart = initialState, action = {}) {
   switch (action.type) {
@@ -145,6 +181,8 @@ export default function reducer(statePart = initialState, action = {}) {
         amount: action.payload.amount,
         data: [...action.payload.posts],
       };
+    case LOAD_POST_TO_EDIT:
+      return { ...statePart, postToEdit: action.payload };
     case START_REQUEST:
       // changing request.pending to true
       return { ...statePart, request: { pending: true, error: null, succes: null } };

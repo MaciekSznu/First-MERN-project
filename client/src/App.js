@@ -12,6 +12,8 @@ class App extends React.Component {
 
   // exact wymusza renderowanie tylko gdy scieżka jest identyczna z podaną w linku
   // Switch zapewnia, że tylko jeden route zostanie zwrócony
+  //          <Route path='/posts/edit/:id' component={EditPost} />
+
   render() {
     return (
      <MainLayout>
