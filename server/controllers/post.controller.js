@@ -73,3 +73,23 @@ exports.getPostsByRange = async (req, res) => {
     res.status(500).json(err);
   }
 };
+
+// edit post
+exports.editPost = async (req, res) => {
+
+  try {
+    const { title, author, content, _id } = req.body;
+
+    const update = {
+      title,
+      author,
+      content,
+    };
+
+    postEdited = await Post.findByIdAndUpdate(_id, update);
+    res.status(200).json(postEdited[0]);
+  }
+  catch(err) {
+    res.status(500).json(err);
+  }
+};

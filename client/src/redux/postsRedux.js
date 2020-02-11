@@ -37,6 +37,7 @@ export const loadPostToEdit = payload => ({ payload, type: LOAD_POST_TO_EDIT });
 const initialState = {
   data: [],
   singlePost: null,
+  postToEdit: {},
   request: {
     pending: false,
     error: null,
