@@ -42,6 +42,7 @@ exports.addPost = async (req, res) => {
 
     postSaved = await newPost.save();
     res.status(200).json(postSaved);
+    console.log(newPost);
 
   }
   catch(err) {

@@ -8,8 +8,12 @@ import Pagination from '../../common/Pagination/Pagination';
 class Posts extends React.Component {
 
   componentDidMount() {
-    const { loadPostsByPage, resetRequest } = this.props;
+    const { loadPostsByPage } = this.props;
     loadPostsByPage(1);
+  }
+
+  componentWillUnmount() {
+    const { resetRequest } = this.props;
     resetRequest();
   }
 

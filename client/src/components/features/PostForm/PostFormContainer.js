@@ -7,7 +7,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addPost: post => dispatch(addPostRequest(post)),
+  addPost: (post) => dispatch(addPostRequest(post)),
   resetRequest: () => dispatch(resetRequest()),
 });
 

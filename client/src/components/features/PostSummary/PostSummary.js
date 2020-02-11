@@ -23,7 +23,7 @@ const PostSummary = ({id, title, author, content}) => (
 PostSummary.propTypes = {
   id: PropTypes.string,
   title: PropTypes.string,
-  author: PropTypes.string.isRequired,
+  author: PropTypes.string,
   content: PropTypes.string,
 };
 
