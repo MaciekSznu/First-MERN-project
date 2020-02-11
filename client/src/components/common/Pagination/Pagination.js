@@ -10,34 +10,61 @@ class Pagination extends React.Component {
     presentPage: this.props.initialPage || 1
   }
 
-  // change local state and then exesute onPageChange function
   changePage = (newPage) => {
     const { onPageChange } = this.props;
 
-    this.setState({ presetnPage: newPage });
+    this.setState({ presentPage: newPage });
     onPageChange(newPage);
-  }
+  };
+
+  changePageUp = () => {
+    const { presentPage } = this.state;
+    const { changePage } = this;
+    changePage(presentPage + 1);
+  };
+
+  changePageDown = () => {
+    const { presentPage } = this.state;
+    const { changePage } = this;
+    changePage(presentPage - 1);
+  };
 
   render() {
 
-    const { pages, onPageChange } = this.props;
+    const { pages } = this.props;
     const { presentPage } = this.state;
-    const { changePage } = this;
+    const { changePage, changePageUp, changePageDown } = this;
 
     // [...Array(pages)] - create an array with no specified data but with number of elements equals to number of pages
     // onClick={() => {changePage(page) }} - execute changePage function
+
     return (
       <div className="pagination">
         <ul className="pagination__list">
-        
-          {[...Array(pages)].map((el, page) =>
-          <li
-            key={++page}
-            onClick={() => {changePage(page) }}
-            className={`pagination__list__item${((page) === presentPage) ? ' pagination__list__item--active' : ''}`}>
-            {page}
-          </li>
+
+          {presentPage > 1 && (
+            <li className="pagination__list__item" onClick={changePageDown}>
+              {'<'}
+            </li>
           )}
+
+          {[...Array(pages)].map((el, page) =>{
+            return (
+              <li
+                key={++page}
+                onClick={() => {changePage(page) }}
+                className={`pagination__list__item${((page) === presentPage) ? ' pagination__list__item--active' : ''}`}>
+                {page}
+              </li>
+            );
+          })}
+
+          {presentPage < pages && (
+            <li className="pagination__list__item" onClick={changePageUp}>
+              {'>'}
+            </li>
+          )}
+
         </ul>
       </div>
     );
@@ -51,4 +78,3 @@ Pagination.propTypes = {
 };
 
 export default Pagination;
-
