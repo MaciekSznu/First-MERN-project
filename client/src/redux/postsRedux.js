@@ -99,13 +99,11 @@ export const addPostRequest = (post) => {
   };
 };
 
-export const loadPostsByPageRequest = (page) => {
+export const loadPostsByPageRequest = (page, postsPerPage = 2) => {
   return async dispatch => {
 
     dispatch(startRequest());
     try {
-
-      const postsPerPage = 2;
 
       const startAt = (page - 1) * postsPerPage;
       const limit = postsPerPage;

@@ -8,8 +8,8 @@ import Pagination from '../../common/Pagination/Pagination';
 class Posts extends React.Component {
 
   componentDidMount() {
-    const { loadPostsByPage } = this.props;
-    loadPostsByPage();
+    const { loadPostsByPage, initialPage = 1, postsPerPage } = this.props;
+    loadPostsByPage(initialPage, postsPerPage);
   }
 
   componentWillUnmount() {
@@ -18,14 +18,15 @@ class Posts extends React.Component {
   }
 
   loadPostsPage = (page) => {
-    const { loadPostsByPage } = this.props;
-    loadPostsByPage(page);
+    const { loadPostsByPage, postsPerPage } = this.props;
+    loadPostsByPage(page, postsPerPage);
   }
 
   render() {
-    const { posts, request, error, pages, presentPage } = this.props;
+    const { posts, request, error, pages, presentPage, pagination } = this.props;
     const { loadPostsPage } = this;
 
+    let isPagination = () => pagination === undefined ? isPagination == true : isPagination == false;
     // Spinner is being rendered only if request.pending = true
     return (
       <div>
@@ -33,7 +34,7 @@ class Posts extends React.Component {
         {(request.pending === false && request.succes === true && posts.length > 0) && <PostsList posts={posts} />}
         {(request.pending === false && request.error !== null) && <Alert variant='error'> {error} </Alert>}
         {(request.pending === false && request.succes === true && posts.length === 0) && <Alert variant='info'> No posts </Alert>}
-        <Pagination pages={pages} onPageChange={loadPostsPage} />
+        {isPagination && <Pagination pages={pages} onPageChange={loadPostsPage} initialPage={presentPage} />}
       </div>
     );
   }
