@@ -25,7 +25,7 @@ class PostForm extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentWillUnmount() {
     const { resetRequest } = this.props;
     resetRequest();
   }

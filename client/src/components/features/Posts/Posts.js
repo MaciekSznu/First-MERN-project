@@ -7,8 +7,12 @@ import Alert from '../../common/Alert/Alert';
 class Posts extends React.Component {
 
   componentDidMount() {
-    const { loadPosts, resetRequest } = this.props;
+    const { loadPosts } = this.props;
     loadPosts();
+  }
+
+  componentWillUnmount() {
+    const { resetRequest } = this.props;
     resetRequest();
   }
 
