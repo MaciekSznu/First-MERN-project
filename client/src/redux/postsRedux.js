@@ -76,14 +76,14 @@ export const loadSinglePostRequest = (id) => {
 
   };
 };
-
+ 
 export const addPostRequest = (post) => {
   return async dispatch => {
 
     dispatch(startRequest());
     try {
 
-      let res = await axios.get(`${API_URL}/posts`, post);
+      await axios.post(`${API_URL}/posts`, post);
       await new Promise((resolve, reject) => setTimeout(resolve, 1000));
       dispatch(endRequest());
     
