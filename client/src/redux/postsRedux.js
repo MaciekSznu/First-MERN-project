@@ -7,6 +7,7 @@ export const getPostsAmount = ({posts}) => posts.data.length;
 export const getRequest = ({posts}) => posts.request;
 export const getSinglePost = ({posts}) => posts.singlePost;
 export const getPages = ({ posts }) => Math.ceil(posts.amount / posts.postsPerPage);
+export const getActualPage = ({posts}) => posts.presentPage;
 
 // ACTIONS & CREATORS
 //action name creator
@@ -104,7 +105,7 @@ export const loadPostsByPageRequest = (page) => {
     dispatch(startRequest());
     try {
 
-      const postsPerPage = 10;
+      const postsPerPage = 2;
 
       const startAt = (page - 1) * postsPerPage;
       const limit = postsPerPage;

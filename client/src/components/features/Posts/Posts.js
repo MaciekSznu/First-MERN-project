@@ -9,7 +9,7 @@ class Posts extends React.Component {
 
   componentDidMount() {
     const { loadPostsByPage } = this.props;
-    loadPostsByPage(1);
+    loadPostsByPage();
   }
 
   componentWillUnmount() {
@@ -23,7 +23,7 @@ class Posts extends React.Component {
   }
 
   render() {
-    const { posts, request, error, pages } = this.props;
+    const { posts, request, error, pages, presentPage } = this.props;
     const { loadPostsPage } = this;
 
     // Spinner is being rendered only if request.pending = true
