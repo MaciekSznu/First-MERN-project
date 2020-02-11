@@ -22,8 +22,18 @@ class PostForm extends React.Component {
       title: '',
       author: '',
       content: '',
+    },
+  };
+
+  componentDidMount() {
+    const { setPostToEdit } = this.props;
+    if (setPostToEdit) {
+      const { title, author, content } = setPostToEdit;
+      this.setState({
+        post: { title, author, content },
+      });
     }
-  }
+  };
 
   componentWillUnmount() {
     const { resetRequest } = this.props;
@@ -41,24 +51,31 @@ class PostForm extends React.Component {
     this.setState({ post: { ...post, content: text }});
   }
 
-  addPost = (e) => {
-    const { addPost } = this.props;
+  handleSubmit = (e) => {
+    const { addPost, setPostToEdit, postToEdit } = this.props;
     const { post } = this.state;
 
     e.preventDefault();
-    addPost(post);
-  }
+    if (!setPostToEdit) {
+      addPost(post);
+    } else {
+      post._id = setPostToEdit._id;
+      postToEdit(post);
+    }
+  };
 
   render() {
     const { post } = this.state;
-    const { handleChange, handleEditor, addPost } = this;
-    const { request } = this.props;
+    const { handleChange, handleEditor, handleSubmit } = this;
+    const { request, setPostToEdit } = this.props;
 
     if(request.error) return <Alert variant="error">{request.error}</Alert>
-    else if(request.succes) return <Alert variant="success">Post has been added!</Alert>
+    else if(request.succes) return <Alert variant="success">
+      Post has been
+      {setPostToEdit ? ' edited!' : ' added!'} </Alert>
     else if(request.pending) return <Spinner />
     else return (
-      <form onSubmit={addPost}>
+      <form onSubmit={handleSubmit}>
         <TextField label="Title" value={post.title} onChange={handleChange} name="title" />
         <TextField label="Author" value={post.author} onChange={handleChange} name="author" />
         <SectionTitle>Edit post content</SectionTitle>
@@ -68,7 +85,7 @@ class PostForm extends React.Component {
           onChange={handleEditor}
           options={{ placeholder: false, toolbar: { buttons: ['bold', 'italic', 'underline', 'anchor', 'h2', 'h3'] } }}
         />
-        <Button type="submit" variant="primary">Add post</Button>
+        <Button type="submit" variant="primary">{setPostToEdit ? 'Update post' : 'Add post'}</Button>
       </form>
     );
   }

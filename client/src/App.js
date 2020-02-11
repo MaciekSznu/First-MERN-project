@@ -7,12 +7,14 @@ import Contact from './components/pages/Contact/ContactPage';
 import NotFound from './components/pages/NotFound/NotFoundPage';
 import AddPost from './components/pages/AddPostPage/AddPostPage';
 import SinglePost from './components/pages/SinglePostPage/SinglePostPage';
+import EditPost from './components/pages/EditPostPage/EditPostPage';
+
+
 
 class App extends React.Component {
 
   // exact wymusza renderowanie tylko gdy scieżka jest identyczna z podaną w linku
   // Switch zapewnia, że tylko jeden route zostanie zwrócony
-  //          <Route path='/posts/edit/:id' component={EditPost} />
 
   render() {
     return (
@@ -23,6 +25,7 @@ class App extends React.Component {
          <Route path='/contact' exact component={Contact} />
          <Route path='/posts/new' exact component={AddPost} />
          <Route path='/posts/:id' component={SinglePost} />
+         <Route path='/posts/edit/:id' component={EditPost} />
          <Route component={NotFound} />
        </Switch>
      </MainLayout>
