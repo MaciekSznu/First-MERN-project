@@ -48,4 +48,28 @@ exports.addPost = async (req, res) => {
   catch(err) {
     res.status(500).json(err);
   }
-}
+};
+
+//get posts by range
+
+exports.getPostsByRange = async (req, res) => {
+
+  try {
+    let { startAt, limit } = req.params;
+
+    startAt = parseInt(startAt);
+    limit = parseInt(limit);
+    
+    // find all posts from base, skip all that is after startAt with limit
+    const posts = await Post.find().skip(startAt).limit(limit);
+    // get amount of all posts
+    const amount = await Post.countDocuments();
+    res.status(200).json({
+      posts,
+      amount
+    });
+  }
+  catch(err) {
+    res.status(500).json(err);
+  }
+};
