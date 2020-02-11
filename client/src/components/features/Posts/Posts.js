@@ -7,9 +7,13 @@ import Alert from '../../common/Alert/Alert';
 class Posts extends React.Component {
 
   componentDidMount() {
-    const {loadPosts} = this.props;
+    const { loadPosts } = this.props;
     loadPosts();
-    // loadPosts to loadPostsRequest, po upływie zadeklarowanych 2s odpala dispatch(loadPosts(...)) i modysikuje store
+  }
+
+  componentWillUnmount() {
+    const { resetRequest } = this.props;
+    resetRequest();
   }
 
   render() {
@@ -32,6 +36,7 @@ Posts.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
     })
   ),

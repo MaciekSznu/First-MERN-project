@@ -6,7 +6,9 @@
   "author": "Maciej Sznurawa <msznurawa@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "npm-run-all": "4.1.5"
+    "npm-run-all": "4.1.5",
+    "react-medium-editor": "1.8.1",
+    "uuid": "3.3.2"
   },
   "scripts": {
     "start": "npm-run-all -p -l start:*",
