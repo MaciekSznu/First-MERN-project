@@ -27,7 +27,7 @@ class Posts extends React.Component {
     const { loadPostsPage } = this;
 
     let isPagination = () => pagination === undefined ? isPagination == true : isPagination == false;
-    // Spinner is being rendered only if request.pending = true
+    
     return (
       <div>
         {(request.pending === true || request.succes === null) && <Spinner />}

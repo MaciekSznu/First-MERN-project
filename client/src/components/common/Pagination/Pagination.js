@@ -10,7 +10,6 @@ class Pagination extends React.Component {
     presentPage: this.props.initialPage || 1
   }
 
-  // change local state and then exesute onPageChange function
   changePage = (newPage) => {
     const { onPageChange } = this.props;
 
