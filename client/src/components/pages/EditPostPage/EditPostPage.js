@@ -1,8 +1,10 @@
 import React from 'react';
-import PostForm from '../../features/PostForm/PostFormContainer';
+import EditPost from '../../features/EditPost/EditPostContainer';
 
-const EditPost = () => (
-  <PostForm />
+const EditPostPage = ({match}) => (
+  <div>
+    <EditPost id={match.params.id} />
+  </div>
 );
 
-export default EditPost;
+export default EditPostPage;

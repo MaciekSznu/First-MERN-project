@@ -7,7 +7,7 @@ import HtmlBox from '../../common/HtmlBox/HtmlBox';
 import cutText from './CutText';
 import { Link } from 'react-router-dom';
 
-const PostSummary = ({id, title, author, content, _id}) => (
+const PostSummary = ({id, title, author, content}) => (
   <article className="post-summary">
     <SmallTitle>{title}</SmallTitle>
     <p>Author: {author}</p>
@@ -18,7 +18,7 @@ const PostSummary = ({id, title, author, content, _id}) => (
       </Link>
     </Button>
     <Button variant="primary">
-      <Link to={`/posts/edit/${_id}`}>
+      <Link to={`/posts/edit/${id}`}>
         Edit post
       </Link>
     </Button>

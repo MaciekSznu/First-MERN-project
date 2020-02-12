@@ -154,8 +154,8 @@ export const editPostRequest = (post) => {
     dispatch(startRequest());
     try {
 
-      await axios.put(`${API_URL}/posts/${post.id}`, post);
-      await new Promise((resolve, reject) => setTimeout(resolve, 1000));
+      await axios.put(`${API_URL}/posts/${post._id}`, post);
+      //await new Promise((resolve, reject) => setTimeout(resolve, 1000));
       dispatch(endRequest());
     
     } catch(e) {

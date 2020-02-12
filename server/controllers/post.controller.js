@@ -86,7 +86,7 @@ exports.editPost = async (req, res) => {
       content,
     };
 
-    postEdited = await Post.findByIdAndUpdate(_id, update);
+    let postEdited = await Post.findByIdAndUpdate(_id, update);
     res.status(200).json(postEdited[0]);
   }
   catch(err) {

@@ -70,11 +70,11 @@ class PostForm extends React.Component {
     const { request, setPostToEdit } = this.props;
 
     if(request.error) return <Alert variant="error">{request.error}</Alert>
-    else if(request.succes) return <Alert variant="success">
+    if(request.success) return <Alert variant="success">
       Post has been
       {setPostToEdit ? ' edited!' : ' added!'} </Alert>
-    else if(request.pending) return <Spinner />
-    else return (
+    if(request.pending) return <Spinner />
+    return (
       <form onSubmit={handleSubmit}>
         <TextField label="Title" value={post.title} onChange={handleChange} name="title" />
         <TextField label="Author" value={post.author} onChange={handleChange} name="author" />
