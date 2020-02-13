@@ -26,7 +26,7 @@ class Posts extends React.Component {
     const { posts, request, error, pages, presentPage, pagination } = this.props;
     const { loadPostsPage } = this;
 
-    let isPagination = () => pagination === undefined ? isPagination == true : isPagination == false;
+    // let isPagination = () => pagination === undefined ? isPagination === true : isPagination === false;
     
     return (
       <div>
@@ -34,7 +34,7 @@ class Posts extends React.Component {
         {(request.pending === false && request.succes === true && posts.length > 0) && <PostsList posts={posts} />}
         {(request.pending === false && request.error !== null) && <Alert variant='error'> {error} </Alert>}
         {(request.pending === false && request.succes === true && posts.length === 0) && <Alert variant='info'> No posts </Alert>}
-        {isPagination && <Pagination pages={pages} onPageChange={loadPostsPage} initialPage={presentPage} />}
+        {pagination !== undefined && <Pagination pages={pages} onPageChange={loadPostsPage} initialPage={presentPage} />}
       </div>
     );
   }
