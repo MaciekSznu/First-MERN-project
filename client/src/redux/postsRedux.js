@@ -8,6 +8,7 @@ export const getRequest = ({posts}) => posts.request;
 export const getSinglePost = ({posts}) => posts.singlePost;
 export const getPages = ({ posts }) => Math.ceil(posts.amount / posts.postsPerPage);
 export const getActualPage = ({posts}) => posts.presentPage;
+export const getRandomPost = ({posts}) => posts.randomPost;
 
 // ACTIONS & CREATORS
 //action name creator
@@ -21,6 +22,8 @@ export const ERROR_REQUEST = createActionName('ERROR_REQUEST');
 export const LOAD_SINGLE_POST = createActionName('LOAD_SINGLE_POST');
 export const RESET_REQUEST = createActionName('RESET_REQUEST');
 export const LOAD_POSTS_PAGE = createActionName('LOAD_POSTS_PAGE');
+export const LOAD_RANDOM_POST = createActionName('LOAD_RANDOM_POST');
+
 
 export const loadPosts = payload => ({ payload, type: LOAD_POSTS });
 export const startRequest = () => ({type: START_REQUEST});
@@ -29,6 +32,8 @@ export const errorRequest = error => ({ error, type: ERROR_REQUEST });
 export const loadSinglePost = payload => ({ payload, type: LOAD_SINGLE_POST });
 export const resetRequest = () => ({type: RESET_REQUEST});
 export const loadPostsByPage = payload => ({ payload, type: LOAD_POSTS_PAGE });
+export const loadRandomPost = payload => ({ payload, type: LOAD_RANDOM_POST });
+
 
 // INITIAL STATE
 const initialState = {
@@ -128,6 +133,24 @@ export const loadPostsByPageRequest = (page, postsPerPage = 2) => {
   };
 };
 
+export const loadRandomPostRequest = (id) => {
+  return async dispatch => {
+
+    dispatch(startRequest());
+    try {
+
+      let res = await axios.get(`${API_URL}/posts/random`);
+      //await new Promise((resolve, reject) => setTimeout(resolve, 1000));
+      dispatch(loadRandomPost(res.data));
+      dispatch(endRequest());
+    
+    } catch(e) {
+      dispatch(errorRequest(e.message));
+    }
+
+  };
+};
+
 // REDUCER
 export default function reducer(statePart = initialState, action = {}) {
   switch (action.type) {
@@ -136,6 +159,8 @@ export default function reducer(statePart = initialState, action = {}) {
       return { ...statePart, data: action.payload };
     case LOAD_SINGLE_POST:
       return { ...statePart, singlePost: action.payload};
+    case LOAD_RANDOM_POST:
+      return { ...statePart, randomPost: action.payload};
     case LOAD_POSTS_PAGE:
       // new object with amount and posts from server request; but postsPerPage and presentPage is prepared locally
       return {

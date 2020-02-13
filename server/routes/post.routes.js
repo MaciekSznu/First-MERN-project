@@ -11,6 +11,9 @@ router.route('/posts/:id').get(PostController.getSinglePost);
 router.route('/posts').post(PostController.addPost);
 // get posts by range
 router.route('/posts/range/:startAt/:limit').get(PostController.getPostsByRange);
+// get random post
+router.route('/posts/random').get(PostController.getRandomPost);
+
 
 
 module.exports = router;
