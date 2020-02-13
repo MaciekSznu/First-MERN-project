@@ -4,6 +4,7 @@ const config = require('./config');
 const mongoose = require('mongoose');
 const loadTestData = require('./testData');
 const helmet = require('helmet');
+const sanitize = require('express-mongo-sanitize')
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use('/api', postRoutes);
 app.use(helmet());
+app.use(sanitize());
 
 // connect to database
 mongoose.connect(config.DB, {useNewUrlParser: true});
