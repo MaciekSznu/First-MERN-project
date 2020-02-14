@@ -4,6 +4,11 @@ import Spinner from '../../common/Spinner/Spinner';
 import Alert from '../../common/Alert/Alert';
 import Post from './Post';
 
+import { FacebookProvider, Comments } from 'react-facebook';
+import { withRouter } from 'react-router-dom';
+
+
+
 class SinglePost extends React.Component {
 
   componentDidMount() {
@@ -18,12 +23,17 @@ class SinglePost extends React.Component {
 
 
   render() {
-    const { post, request} = this.props;
+    const { post, request, location} = this.props;
 
     const renderLoader = () => ((request.pending === true || request.succes === null) && <Spinner />);
 
     const renderPost = () => ((request.pending === false && request.succes === true && post !== undefined && post !== null) && (
+      <>
       <Post title={post.title} author={post.author} content={post.content}/>
+      <FacebookProvider appId="909115412938215">
+        <Comments href={`http://localhost:3000/${location.pathname}`} />
+      </FacebookProvider>
+      </>
     ));
 
     const renderInfo = () => ((request.pending === false && request.succes === true && (post === undefined || post === null)) &&
@@ -54,4 +64,4 @@ SinglePost.propTypes = {
   loadSinglePost: PropTypes.func.isRequired,
 };
 
-export default SinglePost;
+export default withRouter(props => <SinglePost {...props} />) ;
