@@ -1,7 +1,7 @@
 import React from 'react';
 import RandomPost from '../../features/RandomPost/RandomPostContainer';
 
-const RandomPostPage = ({ match }) => (
+const RandomPostPage = () => (
   <div>
     <RandomPost />
   </div>

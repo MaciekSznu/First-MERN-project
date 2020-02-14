@@ -39,6 +39,7 @@ export const loadRandomPost = payload => ({ payload, type: LOAD_RANDOM_POST });
 const initialState = {
   data: [],
   singlePost: null,
+  randomPost: null,
   request: {
     pending: false,
     error: null,
@@ -139,8 +140,8 @@ export const loadRandomPostRequest = (id) => {
     dispatch(startRequest());
     try {
 
-      let res = await axios.get(`${API_URL}/posts/random`);
-      //await new Promise((resolve, reject) => setTimeout(resolve, 1000));
+      let res = await axios.get(`${API_URL}/posts/random/${id}`);
+      await new Promise((resolve, reject) => setTimeout(resolve, 1000));
       dispatch(loadRandomPost(res.data));
       dispatch(endRequest());
     

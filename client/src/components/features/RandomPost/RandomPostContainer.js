@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadRandomPost: () => dispatch(loadRandomPostRequest()),
+  loadRandomPost: (id) => dispatch(loadRandomPostRequest(id)),
 });
 
 export default connect(

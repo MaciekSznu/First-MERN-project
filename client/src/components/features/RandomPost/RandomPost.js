@@ -1,6 +1,6 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
-import SinglePost from '../SinglePost/SinglePostContainer';
+import Post from '../SinglePost/Post';
 import Spinner from '../../common/Spinner/Spinner';
 import NotFound from '../../pages/NotFound/NotFoundPage';
 
@@ -15,7 +15,7 @@ class RandomPost extends React.Component {
     const { randomPost, request } = this.props;
     return (
       <div>
-        {(request.pending && <Spinner />) || (randomPost && <SinglePost post={randomPost} />) || (
+        {(request.pending && <Spinner />) || (randomPost && <Post post={randomPost} />) || (
           <NotFound />
         )}
       </div>
