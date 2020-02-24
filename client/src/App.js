@@ -23,7 +23,7 @@ class App extends React.Component {
          <Route path='/contact' exact component={Contact} />
          <Route path='/posts/new' exact component={AddPost} />
          <Route path='/posts/:id' component={SinglePost} />
-         <Route path='/posts/random/:id' component={RandomPost} />
+         <Route path='/posts/random' component={RandomPost} />
          <Route component={NotFound} />
        </Switch>
      </MainLayout>

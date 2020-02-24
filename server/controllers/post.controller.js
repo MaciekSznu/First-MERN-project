@@ -82,7 +82,9 @@ exports.getRandomPost = async (req, res) => {
 
     const random = Math.floor(Math.random() * amount);
 
-    res.status(200).json( await Post.findOne().skip(random));
+    const randomPost =  await Post.findOne().skip(random);
+
+    res.status(200).json(randomPost);
   }
   catch(err) {
     res.status(500).json(err);

@@ -134,13 +134,13 @@ export const loadPostsByPageRequest = (page, postsPerPage = 2) => {
   };
 };
 
-export const loadRandomPostRequest = (id) => {
+export const loadRandomPostRequest = () => {
   return async dispatch => {
 
     dispatch(startRequest());
     try {
 
-      let res = await axios.get(`${API_URL}/posts/random/${id}`);
+      let res = await axios.get(`${API_URL}/posts/random`);
       await new Promise((resolve, reject) => setTimeout(resolve, 1000));
       dispatch(loadRandomPost(res.data));
       dispatch(endRequest());

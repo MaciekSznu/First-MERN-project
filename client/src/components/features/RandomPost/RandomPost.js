@@ -9,8 +9,14 @@ class RandomPost extends React.Component {
   componentDidMount() {
     const { loadRandomPost, id } = this.props;
     loadRandomPost(id);
+    console.log('lalala');
   }
 
+  componentWillUnmount() {
+    const { resetRequest } = this.props;
+    resetRequest();
+  }
+ 
   render() {
     const { randomPost, request } = this.props;
     return (
