@@ -4,9 +4,7 @@ import {withRouter} from 'react-router-dom';
 import Spinner from '../../common/Spinner/Spinner';
 import Alert from '../../common/Alert/Alert';
 import Post from './Post';
-
 import { FacebookProvider, Comments, ShareButton } from 'react-facebook';
-import { withRouter } from 'react-router-dom';
 import { BASE_URL } from '../../../config';
 
 
