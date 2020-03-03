@@ -7,9 +7,8 @@ const uuid = require('uuid');
 exports.getPosts = async (req, res) => {
 
   try {
-    res.status(200).json( await Post.find());
-  }
-  catch(err) {
+    res.status(200).json(await Post.find());
+  } catch (err) {
     res.status(500).json(err);
   }
   // Znajdź wszystkie posty i zwróć je do klienta wraz z kodem 200 (sukces), o ile udało się wykonać funkcję. Jeśli pojawił się błąd, to zamiast tego, zwróć go, wraz z kodem 500.
@@ -19,9 +18,10 @@ exports.getPosts = async (req, res) => {
 exports.getSinglePost = async (req, res) => {
 
   try {
-    res.status(200).json( await Post.findOne({id: req.params.id}));
-  }
-  catch(err) {
+    res.status(200).json(await Post.findOne({
+      id: req.params.id
+    }));
+  } catch (err) {
     res.status(500).json(err);
   }
 };
@@ -31,7 +31,11 @@ exports.getSinglePost = async (req, res) => {
 exports.addPost = async (req, res) => {
 
   try {
-    const { title, author, content } = req.body;
+    const {
+      title,
+      author,
+      content
+    } = req.body;
 
     let newPost = new Post(req.body);
     //let newPost = new Post();
@@ -44,8 +48,7 @@ exports.addPost = async (req, res) => {
     res.status(200).json(postSaved);
     console.log(newPost);
 
-  }
-  catch(err) {
+  } catch (err) {
     res.status(500).json(err);
   }
 };
@@ -55,12 +58,15 @@ exports.addPost = async (req, res) => {
 exports.getPostsByRange = async (req, res) => {
 
   try {
-    let { startAt, limit } = req.params;
+    let {
+      startAt,
+      limit
+    } = req.params;
 
     startAt = parseInt(startAt);
     limit = parseInt(limit);
-    
-    // find all posts from base, skip all that is after startAt with limit
+
+    //  find all posts from base, skip all that is after startAt with limit
     const posts = await Post.find().skip(startAt).limit(limit);
     // get amount of all posts
     const amount = await Post.countDocuments();
@@ -68,8 +74,22 @@ exports.getPostsByRange = async (req, res) => {
       posts,
       amount
     });
+  } catch (err) {
+    res.status(500).json(err);
   }
-  catch(err) {
+};
+
+exports.getRandomPost = async (req, res) => {
+
+  try {
+
+    const amount = await Post.countDocuments();
+
+    const random = Math.floor(Math.random() * amount);
+
+    const resultPost =  await Post.findOne().skip(random);
+    res.status(200).json(resultPost);
+  } catch (err) {
     res.status(500).json(err);
   }
 };
