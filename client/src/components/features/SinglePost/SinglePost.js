@@ -5,6 +5,12 @@ import Spinner from '../../common/Spinner/Spinner';
 import Alert from '../../common/Alert/Alert';
 import Post from './Post';
 
+import { FacebookProvider, Comments, ShareButton } from 'react-facebook';
+import { withRouter } from 'react-router-dom';
+import { BASE_URL } from '../../../config';
+
+
+
 class SinglePost extends React.Component {
 
   componentDidMount() {
@@ -17,27 +23,40 @@ class SinglePost extends React.Component {
     resetRequest();
   }
 
+  renderLoader = (request) => ((request.pending === true || request.succes === null) && <Spinner />);
+
+  renderPost = (request, post, location) => ((request.pending === false && request.succes === true && post !== undefined && post !== null) && (
+    <>
+      <Post title={post.title} author={post.author} content={post.content}/>
+      <FacebookProvider appId="909115412938215">
+        <ShareButton href={`${BASE_URL}${location.pathname}`}>Share</ShareButton>
+        <Comments href={`${BASE_URL}${location.pathname}`} />
+      </FacebookProvider>
+    </>
+  ));
+
+  renderInfo = (request, post) => ((request.pending === false && request.succes === true && (post === undefined || post === null)) && <Alert variant={'error'}> Post o takim id nie istnieje! </Alert>);
+
+  renderError = (request) => ((request.pending === false && request.error !== null) && <Alert variant={'error'}> {this.props.request.error} </Alert>);
+
 
   render() {
-    const { post, request} = this.props;
+    const { post, request, location} = this.props;
 
-    const renderLoader = () => ((request.pending === true || request.succes === null) && <Spinner />);
+    const renderLoader = this.renderLoader(request);
 
-    const renderPost = () => ((request.pending === false && request.succes === true && post !== undefined && post !== null) && (
-      <Post title={post.title} author={post.author} content={post.content} id={post.id} />
-    ));
+    const renderPost = this.renderPost(request, post, location);
 
-    const renderInfo = () => ((request.pending === false && request.succes === true && (post === undefined || post === null)) &&
-      <Alert variant={'error'}> Post o takim id nie istnieje! </Alert>);
+    const renderInfo = this.renderInfo(request, post);
 
-    const renderError = () => ((request.pending === false && request.error !== null) && <Alert variant={'error'}> {this.props.request.error} </Alert>);
+    const renderError = this.renderError(request);
 
     return (
       <div>
-        {renderLoader()}
-        {renderPost()}
-        {renderInfo()}
-        {renderError()}
+        {renderLoader}
+        {renderPost}
+        {renderInfo}
+        {renderError}
       </div>
     );
   }
@@ -54,5 +73,6 @@ SinglePost.propTypes = {
   ),
   loadSinglePost: PropTypes.func.isRequired,
 };
+
 
 export default withRouter(props => <SinglePost {...props} />);
