@@ -7,9 +7,8 @@ import NotFound from '../../pages/NotFound/NotFoundPage';
 class RandomPost extends React.Component {
 
   componentDidMount() {
-    const { loadRandomPost, id } = this.props;
-    loadRandomPost(id);
-    console.log('lalala');
+    const { loadRandomPost } = this.props;
+    loadRandomPost();
   }
 
   componentWillUnmount() {
@@ -21,7 +20,7 @@ class RandomPost extends React.Component {
     const { randomPost, request } = this.props;
     return (
       <div>
-        {(request.pending && <Spinner />) || (randomPost && <Post post={randomPost} />) || (
+        {(request.pending && <Spinner />) || (randomPost && <Post title={randomPost.title} author={randomPost.author} content={randomPost.content} />) || (
           <NotFound />
         )}
       </div>

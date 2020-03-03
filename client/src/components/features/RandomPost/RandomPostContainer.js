@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router'
 import { getRandomPost, loadRandomPostRequest, getRequest, resetRequest } from '../../../redux/postsRedux';
 import RandomPost from './RandomPost';
 
@@ -12,7 +13,8 @@ const mapDispatchToProps = dispatch => ({
   resetRequest: () => dispatch(resetRequest()),
 });
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps,
-)(RandomPost);
+)(RandomPost));
+

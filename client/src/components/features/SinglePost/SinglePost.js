@@ -1,5 +1,6 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
+import {withRouter} from 'react-router-dom';
 import Spinner from '../../common/Spinner/Spinner';
 import Alert from '../../common/Alert/Alert';
 import Post from './Post';
@@ -54,4 +55,4 @@ SinglePost.propTypes = {
   loadSinglePost: PropTypes.func.isRequired,
 };
 
-export default SinglePost;
+export default withRouter(props => <SinglePost {...props} />);
