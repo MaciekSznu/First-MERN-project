@@ -34,10 +34,7 @@ exports.addPost = async (req, res) => {
     const { title, author, content } = req.body;
 
     let newPost = new Post(req.body);
-    //let newPost = new Post();
-    // newPost.title = title;
-    // newPost.author = author;
-    // newPost.content = content;
+    
     newPost.id = uuid();
 
     postSaved = await newPost.save();
@@ -87,7 +84,7 @@ exports.editPost = async (req, res) => {
     };
 
     let postEdited = await Post.findByIdAndUpdate(_id, update);
-    res.status(200).json(postEdited[0]);
+    res.status(200).json(postEdited);
   }
   catch(err) {
     res.status(500).json(err);

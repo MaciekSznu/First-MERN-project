@@ -93,7 +93,7 @@ export const addPostRequest = (post) => {
     try {
 
       await axios.post(`${API_URL}/posts`, post);
-      await new Promise((resolve, reject) => setTimeout(resolve, 1000));
+      //await new Promise((resolve, reject) => setTimeout(resolve, 1000));
       dispatch(endRequest());
     
     } catch(e) {
@@ -131,13 +131,14 @@ export const loadPostsByPageRequest = (page, postsPerPage = 2) => {
 
   };
 };
-
+ 
 export const loadPostToEditRequest = (id) => {
   return async dispatch => {
 
     dispatch(startRequest());
     try {
       let res = await axios.get(`${API_URL}/posts/${id}`);
+      await new Promise((resolve, reject) => setTimeout(resolve, 1000));
       dispatch(loadPostToEdit(res.data));
       dispatch(endRequest());
     }
@@ -154,8 +155,8 @@ export const editPostRequest = (post) => {
     dispatch(startRequest());
     try {
 
-      await axios.put(`${API_URL}/posts/${post._id}`, post);
-      //await new Promise((resolve, reject) => setTimeout(resolve, 1000));
+      await axios.put(`${API_URL}/update/${post._id}`, post);
+      await new Promise((resolve, reject) => setTimeout(resolve, 1000));
       dispatch(endRequest());
     
     } catch(e) {

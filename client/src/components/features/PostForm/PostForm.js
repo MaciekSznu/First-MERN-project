@@ -12,11 +12,10 @@ import Button from '../../common/Button/Button';
 import Alert from '../../common/Alert/Alert';
 import Spinner from '../../common/Spinner/Spinner';
 
-
 import './PostForm.scss';
 
 class PostForm extends React.Component {
-
+  
   state = {
     post: {
       title: '',
@@ -52,7 +51,7 @@ class PostForm extends React.Component {
   }
 
   handleSubmit = (e) => {
-    const { addPost, setPostToEdit, postToEdit } = this.props;
+    const { addPost, setPostToEdit, editPost } = this.props;
     const { post } = this.state;
 
     e.preventDefault();
@@ -60,7 +59,7 @@ class PostForm extends React.Component {
       addPost(post);
     } else {
       post._id = setPostToEdit._id;
-      postToEdit(post);
+      editPost(post);
     }
   };
 
@@ -69,7 +68,7 @@ class PostForm extends React.Component {
     const { handleChange, handleEditor, handleSubmit } = this;
     const { request, setPostToEdit } = this.props;
 
-    if(request.error) return <Alert variant="error">{request.error}</Alert>
+    if(request.error) return <Alert variant="error">{setPostToEdit.request.error}</Alert>
     if(request.success) return <Alert variant="success">
       Post has been
       {setPostToEdit ? ' edited!' : ' added!'} </Alert>
@@ -85,7 +84,7 @@ class PostForm extends React.Component {
           onChange={handleEditor}
           options={{ placeholder: false, toolbar: { buttons: ['bold', 'italic', 'underline', 'anchor', 'h2', 'h3'] } }}
         />
-        <Button type="submit" variant="primary">{setPostToEdit ? 'Update post' : 'Add post'}</Button>
+        <Button type="submit" variant="primary">{setPostToEdit ? 'Update' : 'Add'}</Button>
       </form>
     );
   }

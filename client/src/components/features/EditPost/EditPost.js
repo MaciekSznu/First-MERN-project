@@ -19,7 +19,7 @@ class EditPost extends React.Component {
   render() {
     const { setPostToEdit, request } = this.props;
 
-  return <div>{(request.success && <PostForm setPostToEdit={setPostToEdit} />) || <Spinner />}</div>
+    return <div>{(request.success && <PostForm setPostToEdit={setPostToEdit} />) || <Spinner />}</div>
   }
 };
 
@@ -28,3 +28,4 @@ EditPost.propTypes = {
 };
 
 export default EditPost;
+ 
