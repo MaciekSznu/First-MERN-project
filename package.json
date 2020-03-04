@@ -1,6 +1,11 @@
 {
   "name": "First-MERN-project",
   "version": "1.0.0",
+  "engines": {
+    "node": "10.16.0",
+    "npm": "6.9.0",
+    "yarn": "1.21.1"
+  },
   "main": "index.js",
   "repository": "git@github.com:MaciekSznu/First-MERN-project.git",
   "author": "Maciej Sznurawa <msznurawa@gmail.com>",
