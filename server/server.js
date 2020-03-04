@@ -34,7 +34,7 @@ db.once('open', () => {
 db.on('error', (err) => console.log(`Error ${err}`));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/../client/build/index.html'));
+  res.sendFile(path.join(`${__dirname}/../client/build/index.html`));
 });
 
 // listening server port
