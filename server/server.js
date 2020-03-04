@@ -4,7 +4,8 @@ const config = require('./config');
 const mongoose = require('mongoose');
 const loadTestData = require('./testData');
 const helmet = require('helmet');
-const sanitize = require('express-mongo-sanitize')
+const sanitize = require('express-mongo-sanitize');
+const path = require('path');
 
 const app = express();
 
@@ -18,6 +19,9 @@ app.use('/api', postRoutes);
 app.use(helmet());
 app.use(sanitize());
 
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '/../client/build')));
+
 // connect to database
 mongoose.connect(config.DB, {useNewUrlParser: true});
 let db = mongoose.connection;
@@ -28,6 +32,10 @@ db.once('open', () => {
   loadTestData();
 });
 db.on('error', (err) => console.log(`Error ${err}`));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/../client/build/index.html'));
+});
 
 // listening server port
 app.listen(config.PORT, function(){
