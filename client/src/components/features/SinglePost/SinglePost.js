@@ -21,9 +21,9 @@ class SinglePost extends React.Component {
     resetRequest();
   }
 
-  renderLoader = (request) => ((request.pending === true || request.succes === null) && <Spinner />);
+  renderLoader = (request) => ((request.pending === true || request.success === null) && <Spinner />);
 
-  renderPost = (request, post, location) => ((request.pending === false && request.succes === true && post !== undefined && post !== null) && (
+  renderPost = (request, post, location) => ((request.pending === false && request.success === true && post !== undefined && post !== null) && (
     <>
       <Post title={post.title} author={post.author} content={post.content}/>
       <FacebookProvider appId="909115412938215">
@@ -33,7 +33,7 @@ class SinglePost extends React.Component {
     </>
   ));
 
-  renderInfo = (request, post) => ((request.pending === false && request.succes === true && (post === undefined || post === null)) && <Alert variant={'error'}> Post o takim id nie istnieje! </Alert>);
+  renderInfo = (request, post) => ((request.pending === false && request.success === true && (post === undefined || post === null)) && <Alert variant={'error'}> Post o takim id nie istnieje! </Alert>);
 
   renderError = (request) => ((request.pending === false && request.error !== null) && <Alert variant={'error'}> {this.props.request.error} </Alert>);
 

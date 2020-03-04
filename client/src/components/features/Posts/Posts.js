@@ -30,10 +30,10 @@ class Posts extends React.Component {
     
     return (
       <div>
-        {(request.pending === true || request.succes === null) && <Spinner />}
-        {(request.pending === false && request.succes === true && posts.length > 0) && <PostsList posts={posts} />}
+        {(request.pending === true || request.success === null) && <Spinner />}
+        {(request.pending === false && request.success === true && posts.length > 0) && <PostsList posts={posts} />}
         {(request.pending === false && request.error !== null) && <Alert variant='error'> {error} </Alert>}
-        {(request.pending === false && request.succes === true && posts.length === 0) && <Alert variant='info'> No posts </Alert>}
+        {(request.pending === false && request.success === true && posts.length === 0) && <Alert variant='info'> No posts </Alert>}
         {pagination !== undefined && <Pagination pages={pages} onPageChange={loadPostsPage} initialPage={presentPage} />}
       </div>
     );
