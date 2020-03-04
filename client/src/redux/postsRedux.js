@@ -187,13 +187,13 @@ export default function reducer(statePart = initialState, action = {}) {
       return { ...statePart, postToEdit: action.payload };
     case START_REQUEST:
       // changing request.pending to true
-      return { ...statePart, request: { pending: true, error: null, succes: null } };
+      return { ...statePart, request: { pending: true, error: null, success: null } };
     case END_REQUEST:
       // changing request.pending to false
-      return { ...statePart, request: { pending: false, error: null, succes: true } };
+      return { ...statePart, request: { pending: false, error: null, success: true } };
     case RESET_REQUEST:
       // changing request.succes to null
-      return { ...statePart, request: { pending: false, error: null, succes: null } };
+      return { ...statePart, request: { pending: false, error: null, success: null } };
     case ERROR_REQUEST:
       return { ...statePart, request: { pending: false, error: action.error, success: false } };
     default:
