@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_URL } from '../config';
-import { BASE_URL } from '../config';
+//import { BASE_URL } from '../config';
 
 
 // SELECTORS
@@ -60,7 +60,7 @@ export const loadPostsRequest = () => {
     dispatch(startRequest());
     try {
 
-      let res = await axios.get(`${BASE_URL}${API_URL}/posts`);
+      let res = await axios.get(`${API_URL}/posts`);
       dispatch(loadPosts(res.data));
       dispatch(endRequest());
     
@@ -77,7 +77,7 @@ export const loadSinglePostRequest = (id) => {
     dispatch(startRequest());
     try {
 
-      let res = await axios.get(`${BASE_URL}${API_URL}/posts/${id}`);
+      let res = await axios.get(`${API_URL}/posts/${id}`);
       dispatch(loadSinglePost(res.data));
       dispatch(endRequest());
     
@@ -113,7 +113,7 @@ export const loadPostsByPageRequest = (page, postsPerPage = 2) => {
       const startAt = (page - 1) * postsPerPage;
       const limit = postsPerPage;
 
-      let res = await axios.get(`${BASE_URL}${API_URL}/posts/range/${startAt}/${limit}`);
+      let res = await axios.get(`${API_URL}/posts/range/${startAt}/${limit}`);
 
       const payload = {
         posts: res.data.posts,
@@ -138,7 +138,7 @@ export const loadRandomPostRequest = () => {
     dispatch(startRequest());
     try {
 
-      let res = await axios.get(`${BASE_URL}${API_URL}/posts/random`);
+      let res = await axios.get(`${API_URL}/posts/random`);
       dispatch(loadRandomPost(res.data));
       dispatch(endRequest());
     
