@@ -61,6 +61,8 @@ export const loadPostsRequest = () => {
     try {
 
       let res = await axios.get(`${API_URL}/posts`);
+      await new Promise(resolve => setTimeout(resolve, 100));
+
       dispatch(loadPosts(res.data));
       dispatch(endRequest());
     
@@ -78,6 +80,8 @@ export const loadSinglePostRequest = (id) => {
     try {
 
       let res = await axios.get(`${API_URL}/posts/${id}`);
+      await new Promise(resolve => setTimeout(resolve, 100));
+
       dispatch(loadSinglePost(res.data));
       dispatch(endRequest());
     
@@ -95,6 +99,8 @@ export const addPostRequest = (post) => {
     try {
 
       await axios.post(`${API_URL}/posts`, post);
+      await new Promise(resolve => setTimeout(resolve, 100));
+
       dispatch(endRequest());
     
     } catch(e) {
@@ -114,6 +120,7 @@ export const loadPostsByPageRequest = (page, postsPerPage = 2) => {
       const limit = postsPerPage;
 
       let res = await axios.get(`${API_URL}/posts/range/${startAt}/${limit}`);
+      await new Promise(resolve => setTimeout(resolve, 100));
 
       const payload = {
         posts: res.data.posts,
@@ -139,6 +146,8 @@ export const loadRandomPostRequest = () => {
     try {
 
       let res = await axios.get(`${API_URL}/posts/random`);
+      await new Promise(resolve => setTimeout(resolve, 100));
+
       dispatch(loadRandomPost(res.data));
       dispatch(endRequest());
     

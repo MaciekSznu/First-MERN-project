@@ -12,12 +12,12 @@ const app = express();
 // import routes
 const postRoutes = require('./routes/post.routes');
 
+app.use(helmet());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use('/api', postRoutes);
-app.use(helmet());
 app.use(sanitize());
+app.use('/api', postRoutes);
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '/../client/build')));
@@ -29,7 +29,7 @@ let db = mongoose.connection;
 // success/error servicing
 db.once('open', () => {
   console.log('Connected to the database');
-  loadTestData();
+  //loadTestData();
 });
 db.on('error', (err) => console.log(`Error ${err}`));
 
